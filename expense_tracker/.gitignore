@@ -9,6 +9,8 @@ application.properties
 .idea/
 *.iml
 *.class
+*.project
+*.classpath
 
 # Ignore dependency caches
 node_modules/
