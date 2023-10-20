@@ -94,6 +94,8 @@ public class ExpenseTrackerView extends JFrame {
   }
 
   public void refreshTable(List<Transaction> transactions) {
+	  
+	  transactionsTable.clearSelection(); 
       // Clear existing rows
       model.setRowCount(0);
       // Get row count
@@ -108,40 +110,50 @@ public class ExpenseTrackerView extends JFrame {
         model.addRow(new Object[]{rowNum+=1,t.getAmount(), t.getCategory(), t.getTimestamp()}); 
         
         //boolean shouldHighlight = false;
-              
-      if (filterTypeComboBox.getSelectedItem().toString().equalsIgnoreCase("Amount")) {
-          double filterAmount = Double.parseDouble(filterValueField.getText());
-          if (t.getAmount() == filterAmount) {
-              transactionsTable.setRowSelectionInterval(rowNum - 1, rowNum - 1);
-              transactionsTable.setSelectionBackground(Color.GREEN);
-        	  //shouldHighlight = true;
-          }
-      } else if (filterTypeComboBox.getSelectedItem().toString().equalsIgnoreCase("Category")) {
-          String filterCategory = filterValueField.getText();
-          if (t.getCategory().equalsIgnoreCase(filterCategory)) {
-              transactionsTable.setRowSelectionInterval(rowNum - 1, rowNum - 1);
-              transactionsTable.setSelectionBackground(Color.GREEN);
-        	  //shouldHighlight = true;
-          }
-      }
-      
-      
-      
-      //totalCost += t.getAmount();
-      //rowNum++;
-      
-      }
-      
+        }
+
         // Add total row
         Object[] totalRow = {"Total", null, null, totalCost};
         model.addRow(totalRow);
-        
-        
-  
+
       // Fire table update
       transactionsTable.updateUI();
   
-    }  
+    } 
+  
+  public void highlightRows(List<Transaction> transactions) {
+	  
+	  transactionsTable.clearSelection(); // Clear previous selections
+	  
+	    String filterType = filterTypeComboBox.getSelectedItem().toString();
+	    String filterValue = filterValueField.getText();
+
+	    for (int row = 0; row < transactionsTable.getRowCount(); row++) {
+	        
+	    	 if (row < transactions.size()) {
+	    	Transaction t = transactions.get(row);
+	    	
+	    	System.out.println("Row: " + row);
+            System.out.println("Transaction Amount: " + t.getAmount());
+            System.out.println("Transaction Category: " + t.getCategory());
+	        
+	        if (filterType.equalsIgnoreCase("Amount")) {
+	            double filterAmount = Double.parseDouble(filterValue);
+	            if (t.getAmount() == filterAmount) {
+	                transactionsTable.addRowSelectionInterval(row, row);
+	                transactionsTable.setSelectionBackground(Color.GREEN);
+	            }
+	        } else if (filterType.equalsIgnoreCase("Category")) {
+	            String filterCategory = filterValue;
+	            if (t.getCategory().equalsIgnoreCase(filterCategory)) {
+	                transactionsTable.addRowSelectionInterval(row, row);
+	                transactionsTable.setSelectionBackground(Color.GREEN);
+	            }
+	        }
+	        
+	    }
+	    }
+  }
   
 
   

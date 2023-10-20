@@ -29,6 +29,16 @@ public class ExpenseTrackerController {
     view.refreshTable(transactions);
 
   }
+  
+  public void refresh_filter() {
+
+	    // Get transactions from model
+	    List<Transaction> transactions = model.getTransactions();
+
+	    // Pass to view
+	    view.highlightRows(transactions);
+
+	  }
 
   public boolean addTransaction(double amount, String category) {
     if (!InputValidation.isValidAmount(amount)) {
@@ -65,7 +75,9 @@ public class ExpenseTrackerController {
 
       filteredTransactions = filter.filter(model.getTransactions());
       //view.refreshTable(filteredTransactions);
-      refresh();
+      //refresh();
+      //view.highlightRows(filteredTransactions);
+      refresh_filter();
       return true;
   }
   
