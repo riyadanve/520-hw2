@@ -28,3 +28,14 @@ This is usually done by keeping the data objects private, and getters and setter
 - Changed the class' access modifier to final to prevent external data modification.
 - Changed the fields amount, category, and timestamp to private for encapsulating the data.
 - Removed the setter methods to prevent external modification of the fields, ensuring immutability. Only getter methods are included, which provide read only access to the data.
+
+## Extensibility
+
+Modified the ExpenseTrackerApp, ExpenseTrackerView and ExpenseTrackerController and added an interface TransactionFilter, AmountFilter and CategoryFilter to implement the functionality of adding a filter to the existing application.
+
+1. Updated the ExpenseTrackerApp to add a seperate action listener for the apply filter button and display an error dialog box in case of invalid input values.
+2. Added a seperate interface TransactionFilter and extended it into reusable classes: AmountFilter and CategoryFilter to ensure that new filters can be added easily.
+3. Updated the ExpenseTrackerController code to add a new method applyfilter() which applies input validation on the filter values and calls the view function to display the highlighted rows.
+4. Updated the ExpenseTracekrView with a highlightRows() function to highlight the rows which match the filter criteria in green. Updated the code for filter UI components.
+
+
