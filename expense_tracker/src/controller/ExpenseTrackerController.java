@@ -46,4 +46,29 @@ public class ExpenseTrackerController {
   }
   
   // Other controller methods
+  
+  public boolean applyFilter(String filterType, String filterValue) {
+      List<Transaction> filteredTransactions;
+      TransactionFilter filter;
+
+      if ("amount".equalsIgnoreCase(filterType) && InputValidation.isValidAmount(Double.parseDouble(filterValue))) {
+          double amount = Double.parseDouble(filterValue);
+          filter = new AmountFilter(amount);
+          
+      } else if ("category".equalsIgnoreCase(filterType) && InputValidation.isValidCategory(filterValue)) {
+          filter = new CategoryFilter(filterValue);
+          
+      } else {
+          // Invalid filter type
+          return false;
+      }
+
+      filteredTransactions = filter.filter(model.getTransactions());
+      //view.refreshTable(filteredTransactions);
+      refresh();
+      return true;
+  }
+  
+  
+  
 }

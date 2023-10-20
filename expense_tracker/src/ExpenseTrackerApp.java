@@ -33,6 +33,23 @@ public class ExpenseTrackerApp {
         view.toFront();
       }
     });
+    
+ // Handle filter button clicks
+    view.filterBtn().addActionListener(e -> {
+        String filterType = view.getFilterType();     
+        String filterValue = view.getFilterValue();
+        
+        boolean added = controller.applyFilter(filterType, filterValue);
+        
+        if (!added) {
+            JOptionPane.showMessageDialog(view, "Invalid amount or category entered");
+            view.toFront();
+          }
+
+        
+    });
+    
+    
 
   }
 
