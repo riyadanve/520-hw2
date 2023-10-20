@@ -141,13 +141,13 @@ public class ExpenseTrackerView extends JFrame {
 	            double filterAmount = Double.parseDouble(filterValue);
 	            if (t.getAmount() == filterAmount) {
 	                transactionsTable.addRowSelectionInterval(row, row);
-	                transactionsTable.setSelectionBackground(Color.GREEN);
+	                transactionsTable.setSelectionBackground(new Color(173, 255, 168));
 	            }
 	        } else if (filterType.equalsIgnoreCase("Category")) {
 	            String filterCategory = filterValue;
 	            if (t.getCategory().equalsIgnoreCase(filterCategory)) {
 	                transactionsTable.addRowSelectionInterval(row, row);
-	                transactionsTable.setSelectionBackground(Color.GREEN);
+	                transactionsTable.setSelectionBackground(new Color(173, 255, 168));
 	            }
 	        }
 	        
